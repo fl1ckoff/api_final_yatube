@@ -12,7 +12,7 @@ from posts.models import Post, Group
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
-    serializer_class = serializers.PostSerializer
+    serializer_class = PostSerializer
     permission_classes = (
         IsAuthorOrReadOnly,
         permissions.IsAuthenticatedOrReadOnly
@@ -32,6 +32,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def get_comment_post(self):
         post = get_object_or_404(Post, id=self.kwargs.get('post_id'))
+        return post
 
     def perform_create(self, serializer):
         post = self.get_comment_post()
