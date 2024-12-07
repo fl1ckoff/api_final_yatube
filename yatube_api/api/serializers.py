@@ -21,6 +21,10 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = '__all__'
         model = Comment
 
+        extra_kwargs = {
+            'post': {'read_only': True}
+        }
+
 
 class GroupSerializer(serializers.ModelSerializer):
 
